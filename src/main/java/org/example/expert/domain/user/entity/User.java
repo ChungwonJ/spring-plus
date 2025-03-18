@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.common.entity.Timestamped;
+import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.user.enums.UserRole;
+import org.springframework.security.core.GrantedAuthority;
 
 @Getter
 @Entity
@@ -18,12 +20,14 @@ public class User extends Timestamped {
     @Column(unique = true)
     private String email;
     private String password;
+    private String nickname;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    public User(String email, String password, UserRole userRole) {
+    public User(String email, String password,String nickname, UserRole userRole) {
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
         this.userRole = userRole;
     }
 
@@ -34,7 +38,26 @@ public class User extends Timestamped {
     }
 
     public static User fromAuthUser(AuthUser authUser) {
-        return new User(authUser.getId(), authUser.getEmail(), authUser.getUserRole());
+        if (authUser == null) {
+            throw new InvalidRequestException("AuthUser 객체가 null입니다.");
+        }
+
+        String role = authUser.getUserRole();
+
+        System.out.println("User.fromAuthUser()에서 가져온 role: " + role);
+
+        if (role == null) {
+            throw new InvalidRequestException("AuthUser에서 권한 정보를 가져오지 못했습니다.");
+        }
+
+        UserRole userRole;
+        try {
+            userRole = UserRole.valueOf(role);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidRequestException("유효하지 않은 UserRole: " + role);
+        }
+
+        return new User(authUser.getId(), authUser.getEmail(), userRole);
     }
 
     public void changePassword(String password) {
