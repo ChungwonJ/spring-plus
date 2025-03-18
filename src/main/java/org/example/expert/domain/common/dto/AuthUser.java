@@ -19,15 +19,9 @@ public class AuthUser {
         this.id = id;
         this.email = email;
         this.authorities = List.of(new SimpleGrantedAuthority(userRole.name()));
-
-        System.out.println("AuthUser 생성됨: id = " + id + ", email = " + email + ", userRole = " + userRole.name());
     }
 
     public String getUserRole() {
-        if (authorities == null || authorities.isEmpty()) {
-            throw new IllegalArgumentException("authorities 목록이 비어있습니다.");
-        }
-
         return authorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .findFirst()

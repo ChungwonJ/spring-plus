@@ -38,17 +38,7 @@ public class User extends Timestamped {
     }
 
     public static User fromAuthUser(AuthUser authUser) {
-        if (authUser == null) {
-            throw new InvalidRequestException("AuthUser 객체가 null입니다.");
-        }
-
         String role = authUser.getUserRole();
-
-        System.out.println("User.fromAuthUser()에서 가져온 role: " + role);
-
-        if (role == null) {
-            throw new InvalidRequestException("AuthUser에서 권한 정보를 가져오지 못했습니다.");
-        }
 
         UserRole userRole;
         try {
