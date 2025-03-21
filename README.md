@@ -6,7 +6,7 @@
 -할 일 저장 기능을 구현한 API(/todos)를 호출할 때 저장불가 에러발생
 
 ### 해결
-위치 : [TodoService](‎src/main/java/org/example/expert/domain/todo/service/TodoService.java)
+### 위치 : [TodoService](‎src/main/java/org/example/expert/domain/todo/service/TodoService.java)
 -Transactional 어노테이션이 읽기전용으로 설정 되어있는 부분 삭제
 
 ### **2. JWT의 이해**
@@ -16,7 +16,7 @@
 - 프론트엔드 개발자가 JWT에서 유저의 닉네임을 꺼내 화면에 보여주길 원하고 있어요.
 
 ### 해결
-위치 : [User](src/main/java/org/example/expert/domain/user/entity/User.java), 
+### 위치 : [User](src/main/java/org/example/expert/domain/user/entity/User.java), 
 [SignupRequest](src/main/java/org/example/expert/domain/auth/dto/request/SignupRequest.java),
 [AuthService](src/main/java/org/example/expert/domain/auth/service/AuthService.java),
 [JwtUtil](src/main/java/org/example/expert/config/JwtUtil.java),
@@ -35,7 +35,7 @@
 - JPQL을 사용하고, 쿼리 메소드 명은 자유롭게 지정해도 된다.
 
 ### 해결
-위치 : [TodoController](src/main/java/org/example/expert/domain/todo/controller/TodoController.java),
+### 위치 : [TodoController](src/main/java/org/example/expert/domain/todo/controller/TodoController.java),
 [TodoService](src/main/java/org/example/expert/domain/todo/service/TodoService.java),
 [TodoRepository](src/main/java/org/example/expert/domain/todo/repository/TodoRepository.java)
 - TodoController에 RequestParam으로 weather, start, end 값을 추가함.
@@ -49,7 +49,7 @@
   해야 한다.
 
 ### 해결
-위치 : [TodoControllerTest](src/test/java/org/example/expert/domain/todo/controller/TodoControllerTest.java)
+### 위치 : [TodoControllerTest](src/test/java/org/example/expert/domain/todo/controller/TodoControllerTest.java)
 -TodoControllerTest에서 BAD_REQUEST가 되어야 400번 에러 테스트가 성공이니 기존에 ok되었던 부분들을 BAD_REQUEST로 수정
 
 ### **5. AOP의 이해**
@@ -57,7 +57,7 @@
 - AdminAccessLoggingAspect 클래스에 있는 AOP를 수정하여 위 요구사항을 충족해야 한다.
 
 ### 해결
-위치 : [AdminAccessLoggingAspect](src/main/java/org/example/expert/aop/AdminAccessLoggingAspect.java)
+### 위치 : [AdminAccessLoggingAspect](src/main/java/org/example/expert/aop/AdminAccessLoggingAspect.java)
 - AdminAccessLoggingAspect 부분에 @After 를 @Before로 바꿔 메서드 실행전 동작할 수 있도록 수정.
 
 ## Level. 2
@@ -67,7 +67,7 @@
 - JPA의 Cascade 기능을 활용해 할 일을 생성한 유저가 담당자로 등록될 수 있게 하여야 한다.
 
 ### 해결
-위치 : [Todo](src/main/java/org/example/expert/domain/todo/entity/Todo.java)
+### 위치 : [Todo](src/main/java/org/example/expert/domain/todo/entity/Todo.java)
 - managers에서 기존 @OneToMany(mappedBy = "todo") 를 @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL)로 수정하여 manager까지
   함께 영속화 시키도록 수정함.
 
@@ -75,7 +75,7 @@
 - CommentController 클래스의 getComments() API를 호출할 때 N + 1 문제가 발생하고 있으므로 수정해야 한다.
 
 ### 해결
-위치 : [CommentRepository](src/main/java/org/example/expert/domain/comment/repository/CommentRepository.java)
+### 위치 : [CommentRepository](src/main/java/org/example/expert/domain/comment/repository/CommentRepository.java)
 -JPQL로 작성된 findByTodoIdWithUser를 JOIN에서 LEFT JOIN FETCH로 수정
 
 
@@ -84,7 +84,7 @@
 - N + 1 문제가 발생해서는 안된다.
 
 ### 해결
-위치 : [build](build.gradle),
+### 위치 : [build](build.gradle),
 [QueryDslConfig](src/main/java/org/example/expert/config/QueryDslConfig.java),
 [TodoRepositoryCustom](src/main/java/org/example/expert/domain/todo/repository/TodoRepositoryCustom.java),
 [TodoRepositoryCustomImpl](src/main/java/org/example/expert/domain/todo/repository/TodoRepositoryCustomImpl.java)
@@ -100,7 +100,7 @@
 - JWT는 그대로 사용하여야 한다.
 
 ### 해결
-위치 : [build](build.gradle),
+### 위치 : [build](build.gradle),
 [UserRole](src/main/java/org/example/expert/domain/user/enums/UserRole.java),
 [JwtAuthenticationFilter](src/main/java/org/example/expert/config/JwtAuthenticationFilter.java),
 [JwtAuthenticationToken](src/main/java/org/example/expert/config/JwtAuthenticationToken.java),
@@ -136,7 +136,7 @@
 | GET      | QueryDSL을 이용한 할일 검색 | `/todos/search` | YES   | Query - String : title, String createdAt, String : nickname | none   | `200 OK`, `400 Bad Request` | `{ "title": string, "managerCount" : long, "commentCount" : long }` |
 
 ### 해결
-위치 : [TodoController](src/main/java/org/example/expert/domain/todo/controller/TodoController.java),
+### 위치 : [TodoController](src/main/java/org/example/expert/domain/todo/controller/TodoController.java),
 [TodoSearchResponse](src/main/java/org/example/expert/domain/todo/dto/response/TodoSearchResponse.java),
 [TodoRepositoryCustom](src/main/java/org/example/expert/domain/todo/repository/TodoRepositoryCustom.java),
 [TodoRepositoryCustomImpl](src/main/java/org/example/expert/domain/todo/repository/TodoRepositoryCustomImpl.java),
@@ -160,7 +160,7 @@
         - 성공 실패 여부
 
 ### 해결
-위치 : [Log](src/main/java/org/example/expert/domain/log/entity/Log.java),
+### 위치 : [Log](src/main/java/org/example/expert/domain/log/entity/Log.java),
 [LogRepository](src/main/java/org/example/expert/domain/log/repository/LogRepository.java),
 [LogService](src/main/java/org/example/expert/domain/log/service/LogService.java),
 [ManagerService](src/main/java/org/example/expert/domain/manager/service/ManagerService.java)
